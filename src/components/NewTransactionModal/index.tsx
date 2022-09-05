@@ -11,6 +11,11 @@ import {
   TransactionTypeButton,
 } from "./styles";
 import { Controller, useForm } from "react-hook-form";
+import { useContext } from "react";
+import {
+  TransactionsContext,
+  TTransactions,
+} from "../../contexts/TransactionsContext";
 
 const newTransactionFormSchema = z.object({
   description: z.string(),
@@ -27,15 +32,27 @@ export const NewTransactionModal = () => {
     register,
     handleSubmit,
     formState: { isSubmitting },
+    reset,
   } = useForm<NewTransactionFormInputs>({
     resolver: zodResolver(newTransactionFormSchema),
     defaultValues: {
       type: "income",
     },
   });
+  const { createTransaction } = useContext(TransactionsContext);
 
-  const handleCreateNewTransaction = (data: NewTransactionFormInputs) => {
-    console.log(data);
+  const handleCreateNewTransaction = async (data: NewTransactionFormInputs) => {
+    const { category, description, price, type } = data;
+    const newDate: TTransactions = {
+      id: crypto.randomUUID(),
+      description,
+      type,
+      category,
+      price,
+      createdAt: new Date().toDateString(),
+    };
+    createTransaction(newDate);
+    reset();
   };
 
   return (
