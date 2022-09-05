@@ -1,8 +1,8 @@
-import * as Dialog from "@radix-ui/react-dialog";
+import * as Dialog from '@radix-ui/react-dialog'
 
-import { HeaderContainer, HeaderContent, NewTransactionButton } from "./styles";
-import logo from "../../assets/logo.svg";
-import { NewTransactionModal } from "../NewTransactionModal";
+import { HeaderContainer, HeaderContent, NewTransactionButton } from './styles'
+import logo from '../../assets/logo.svg'
+import { NewTransactionModal } from '../NewTransactionModal'
 
 export const Header = () => {
   return (
@@ -17,5 +17,5 @@ export const Header = () => {
         </Dialog.Root>
       </HeaderContent>
     </HeaderContainer>
-  );
-};
+  )
+}
